@@ -24,7 +24,6 @@ public class Test1 {
 		double[] mathScore = new double[10];
 		double[] engScore = new double[10];
 		int classNum = 3;
-
 		
 		for (int i = 1; i <= 10; i++ ) {
 			System.out.println(i+"번째 학생의 국어 점수를 입력하시오 : ");
