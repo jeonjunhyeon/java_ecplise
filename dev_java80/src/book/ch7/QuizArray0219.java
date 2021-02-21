@@ -40,8 +40,8 @@ public class QuizArray0219 {
 		QuizArray0219 qa = new QuizArray0219();
 		int size = 10;
 		qa.initArray(size);
-		//qa.printArray(size);
-		//int max = qa.maxInArray(size);
-		//System.out.println("최대값 : " + max);
+		qa.printArray(size);
+		int max = qa.maxInArray(size);
+		System.out.println("최대값 : " + max);
 	}
 }
