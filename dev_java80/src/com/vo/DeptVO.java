@@ -31,11 +31,12 @@ public class DeptVO { //변수는 3개이므로 ROW는 한 번에 하나씩만 �
 	private String dname = null; //레퍼런스 타입 - Class급으로 값이 아니라 주소번지가 나온다. 영업부가 출력되지 않나요? 돌연변이 이기에 예외로 출력된다.(중요)
 	private String loc = null;
 	
-	// getter메소드 - Read
-	public int getDeptno() {
+	// getter메소드 - Read - 리턴타입이 있다.
+	public int getDeptno() { //파라미터는 필요없다.
 		return deptno;
 	}
 	// Setter 메소드 - Write, Save 느낌으로 접근해보기
+	// 리턴 타입은 필요없다. 하지만, 파라미터는 반드시 필요하다.
 	public void setDeptno(int deptno) {
 		//deptno = 30; //상수, 재사용성이 떨어짐
 		//this는 나 자신을 가리키는 수정자이다. 여기서는 지변과 식별을 위해서 사용함 (생략 가능함/그런데 생략하면 헷갈림)

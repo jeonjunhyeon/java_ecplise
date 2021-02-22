@@ -5,14 +5,14 @@ import java.util.Scanner;
 public class Sum_Quiz1_1 {
 	
 	public void sum(int[] firstNum) {
-		int sumScore = firstNum[0] + firstNum[1]; // sumScore
+		int sumScore = firstNum[0] + firstNum[1];
 		System.out.println("합계 :" + sumScore);
 	}
 	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		Sum_Quiz1_1 sq = new Sum_Quiz1_1();
-				
+		
 		int[] firstNum = new int[5];
 		
 		for(int j=0; j<3; j++) {
