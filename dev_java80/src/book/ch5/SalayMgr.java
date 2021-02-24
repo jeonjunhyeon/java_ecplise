@@ -31,6 +31,7 @@ public class SalayMgr implements ActionListener {
 	JButton           jbtn          = null;
 	String            jbtns_label[] = {"조회","입력","수정","삭제","종료"};
 	JPanel            jp_north      = null;
+	
 	//생성자
 	public SalayMgr() {
 		jf_sal  = new JFrame(); //선언과 생성을 분리해 본다. - 차이 - 메모리에 로딩(점유) : 우리가 필요한 시점에서
@@ -51,12 +52,12 @@ public class SalayMgr implements ActionListener {
 			jbtn = new JButton(jbtns_label[i]);
 			jbtns[i] = jbtn; //버튼 객체 배열과 동기화 처리하기
 			jp_north.add(jbtn);
-			// 이벤트 소스와 이벤트 처리 핸들러 메소드 매칭
+			// 이벤트 소스(버튼)와 이벤트 처리 핸들러 메소드 매칭
 			jbtns[i].addActionListener(this);//this는 현재 활성화된 객체 주소번지 SalaryMgr
 		}
-		initDisplay();
+		initDisplay(); // 생성자 호출이 먼저 일어난 후, 화면을 그려주는 initDisplay가 호출되는 것이다.
 	}
-	
+
 	//화면처리부
 	public void initDisplay() {
 		System.out.println("initDisplay 호출 성공");
@@ -75,8 +76,27 @@ public class SalayMgr implements ActionListener {
 		new SalayMgr();
 
 	}
-
-	@Override
+	// actionPerformed에서 호출되어야 함
+	public void getEmpDetail(int pmepno) {
+		EmpVO  eVO = new EmpVO();
+		eVO.setEname("이순신");
+		DeptVO dVO = new DeptVO();
+		dVO.setDname("개발1팀");
+		eVO.setdVO(dVO); // 이 전체적인 코드에서 가장 중요한 부분이다.
+		//java.util에서 제공되는 클래스로 타입에 대한 제약없이 늘었다 줄었다 함
+		//연관있는 레코드를 한번에 밀어넣기 위하여 사용.
+		Vector oneRow = new Vector();
+		oneRow.addElement(eVO.getEname());
+		oneRow.addElement(eVO.getdVO().getDname());
+		dtm_sal.addRow(oneRow);
+		for(int r=1;r<2;r++) {
+			for(int c=0;c<2;c++) {
+				dtm_sal.setValueAt(eVO.getEname(), r, 0);
+				dtm_sal.setValueAt(eVO.getdVO().getDname(), r, 1);
+			}
+		}
+	}////////////////// end of getEmpDetail
+	@Override // 장치에 따라 달라지기 떄문에 언제 열릴지 모른다.
 	public void actionPerformed(ActionEvent ae) {
 		Object obj = ae.getSource(); //버튼의 주소번지를 출력함 예) @abcd1234
 		String command = ae.getActionCommand();//버튼의 라벨값을 출력함
@@ -90,23 +110,8 @@ public class SalayMgr implements ActionListener {
 		}
 		else if("조회".equals(command)) {
 			System.out.println("종료버튼 이벤트 감지됨.");
-			EmpVO  eVO = new EmpVO();
-			eVO.setEname("이순신");
-			DeptVO dVO = new DeptVO();
-			dVO.setDname("개발1팀");
-			eVO.setdVO(dVO); // 이 전체적인 코드에서 가장 중요한 부분이다.
-			//java.util에서 제공되는 클래스로 타입에 대한 제약없이 늘었다 줄었다 함
-			//연관있는 레코드를 한번에 밀어넣기 위하여 사용.
-			Vector oneRow = new Vector();
-			oneRow.addElement(eVO.getEname());
-			oneRow.addElement(eVO.getdVO().getDname());
-			dtm_sal.addRow(oneRow);
-			for(int r=1;r<2;r++) {
-				for(int c=0;c<2;c++) {
-					dtm_sal.setValueAt(eVO.getEname(), r, 0);
-					dtm_sal.setValueAt(eVO.getdVO().getDname(), r, 1);
-				}
-			}
+			getEmpDetail(7566);
+			
 		}
 	}
 

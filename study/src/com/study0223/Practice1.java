@@ -10,10 +10,17 @@ public class Practice1 {
 		System.out.println("수 입력 : ");
 		int nums = 0;
 		
-		if(nums%3==0) {
-			int num = sc.nextInt();
-			System.out.println(nums + "는 3의 배수입니다.");
+		for(int i=0;i<5;i++) {
+			nums = sc.nextInt();
+			if(nums%3==0) {
+				System.out.println(nums + "는 3의 배수입니다.");
+			}
+			else {
+				System.out.println("3의 배수가 아닙니다.");
+			}
+			i++;
 		}
+		
 	}
 
 }
