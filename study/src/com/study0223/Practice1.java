@@ -4,23 +4,25 @@ import java.util.Scanner;
 
 public class Practice1 {
 	
-	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("수 입력 : ");
-		int nums = 0;
+		int a[] = new int[10];
+		int count = 0;
 		
-		for(int i=0;i<5;i++) {
-			nums = sc.nextInt();
-			if(nums%3==0) {
-				System.out.println(nums + "는 3의 배수입니다.");
+		for(int j=1;j<a.length;j++) {
+			for(int i=1;i<a.length;i++) {
+				System.out.println(i + " * " + j + " = " + i*j);
+				if((i*j)%3==0) {
+					System.out.println("3배수");
+					count++;
+				}
+				else {
+					
+				}
 			}
-			else {
-				System.out.println("3의 배수가 아닙니다.");
-			}
-			i++;
 		}
-		
+		System.out.println("=============종료==============");
+		System.out.println("3배수의 갯수 :" + count);
+		sc.close();
 	}
-
 }
