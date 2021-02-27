@@ -7,7 +7,10 @@ public class EmpVO {
 	public void setdVO(DeptVO dVO) {
 		this.dVO = dVO;
 	}
-	//insert here - 급여 명세서에 부서이름을 출력하기 위한 SELECT문을 가지고 결정해보기
+	// insert here - 급여 명세서에 부서이름을 출력하기 위한 SELECT문을 가지고 결정해보기
+	// 여기 변수들은 모두 private로 한다. - 캡슐레이션(은닉화) - 보호(위변조), 직접 값을 변경불가
+	// 각각의 값을 유지하거나, 재사용하는 문제는 인스턴스화에 따라 각각 다르게 활용가능하다.
+	// 값을 초기화하는 방법에 대해서는 두 가지가 있습니다. 1) setter, 2) 생성자
 	private DeptVO dVO        =null;
 	private int    empno      =0; //7566
 	private String ename      =""; // 사원명
@@ -23,6 +26,19 @@ public class EmpVO {
 	public EmpVO() {}
 	public EmpVO(int empno) {
 		this.empno = empno; //대입연산자 - 그 값(지변)이 유지(다른 클래스에서)된다. 
+	}	
+	public EmpVO(int empno, String ename, String job, int mgr, 
+				 String hiredate, double sal, double comm, 
+				 int deptno, DeptVO dVO) {
+		this.empno    = empno; //대입연산자 - 그 값(지변)이 유지(다른 클래스에서)된다.
+		this.ename    = ename;
+		this.job 	  = job;
+		this.mgr 	  = mgr;
+		this.hiredate = hiredate;
+		this.sal 	  = sal;
+		this.comm 	  = comm;
+		this.deptno   = deptno;
+		this.dVO 	  = dVO;
 	}	
 	
 	public int getEmpno() {
