@@ -17,9 +17,10 @@ import com.vo.EmpVO;
  * 
  */
 public class JdbcTest {
+	
 	//선언부
 	static final String _DRIVER = "oracle.jdbc.driver.OracleDriver";
-	static final String _URL 	= "jdbc:oracle:thin:@192.168.0.30:1521:orcl11";
+	static final String _URL 	= "jdbc:oracle:thin:@192.168.35.2:1521:orcl11";
 	String              _USER 	= "scott";
 	String              _PW 	= "tiger";
 	// 물리적으로 떨어져 있는 서버에 연결통로 만들기
@@ -28,6 +29,7 @@ public class JdbcTest {
 	PreparedStatement   pstmt    = null;
 	// 오라클의 커서를 조작하는 객체 선언
 	ResultSet           rs      = null;
+	
 	//생성부
 	public JdbcTest() {
 		String sql = "SELECT empno, ename, sal FROM emp";
@@ -41,17 +43,17 @@ public class JdbcTest {
 			// 오라클에 살고 있는 커서 조작 위에서 자바가 제공하는 객체 생성
 			rs = pstmt.executeQuery();
 			EmpVO eVO = null;
-			rs.next();
-			rs.next();
-			rs.next();
-			rs.next();
-			rs.next();
-			rs.next();
-			rs.next();
-			rs.next();
-			rs.next();
-			rs.next();
-			rs.next();
+//			rs.next();
+//			rs.next();
+//			rs.next();
+//			rs.next();
+//			rs.next();
+//			rs.next();
+//			rs.next();
+//			rs.next();
+//			rs.next();
+//			rs.next();
+//			rs.next();
 			while(rs.next()) {
 				eVO = new EmpVO();
 				eVO.setEmpno(rs.getInt("empno"));

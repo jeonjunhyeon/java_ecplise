@@ -1,12 +1,6 @@
 package com.vo;
 
 public class EmpVO {
-	public DeptVO getdVO() {
-		return dVO;
-	}
-	public void setdVO(DeptVO dVO) {
-		this.dVO = dVO;
-	}
 	// insert here - 급여 명세서에 부서이름을 출력하기 위한 SELECT문을 가지고 결정해보기
 	// 여기 변수들은 모두 private로 한다. - 캡슐레이션(은닉화) - 보호(위변조), 직접 값을 변경불가
 	// 각각의 값을 유지하거나, 재사용하는 문제는 인스턴스화에 따라 각각 다르게 활용가능하다.
@@ -24,9 +18,9 @@ public class EmpVO {
 	//생성자의 경우 생략할 수 있고, 생략되었을 때 JVM이 대신 제공해줌
 	//그러나 한개라도 생성자가 정의되어 있다면, 제공되지 않는다. (이것은 디폴트 생성자 포함이다. - 디폴트 생성자는 파라미터를 가지지 않는 생성자를 말함.)
 	public EmpVO() {}
-	public EmpVO(int empno) {
-		this.empno = empno; //대입연산자 - 그 값(지변)이 유지(다른 클래스에서)된다. 
-	}	
+//	public EmpVO(int empno) {
+//		this.empno = empno; //대입연산자 - 그 값(지변)이 유지(다른 클래스에서)된다. 
+//	}	
 	public EmpVO(int empno, String ename, String job, int mgr, 
 				 String hiredate, double sal, double comm, 
 				 int deptno, DeptVO dVO) {
@@ -88,5 +82,11 @@ public class EmpVO {
 	}
 	public void setDeptno(int deptno) {
 		this.deptno = deptno;
+	}
+	public DeptVO getdVO() {
+		return dVO;
+	}
+	public void setdVO(DeptVO dVO) {
+		this.dVO = dVO;
 	}
 }
