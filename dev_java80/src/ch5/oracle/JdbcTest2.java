@@ -1,11 +1,11 @@
 package ch5.oracle;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.util.DBConnectionMgr;
 import com.vo.EmpVO;
 
 
@@ -16,68 +16,51 @@ import com.vo.EmpVO;
  * 
  * 
  */
-public class JdbcTest {
+public class JdbcTest2 {
 	
 	//선언부
-	static final String _DRIVER = "oracle.jdbc.driver.OracleDriver";
-	static final String _URL 	= "jdbc:oracle:thin:@192.168.35.2:1521:orcl11";
-	String              _USER 	= "scott";
-	String              _PW 	= "tiger";
 	// 물리적으로 떨어져 있는 서버에 연결통로 만들기
 	Connection          con     = null;
-	// 35번 서버에 내가 작성한 select문을 전달해주는 객체 선언
+	// 30번 서버에 내가 작성한 select문을 전달해주는 객체 선언
 	PreparedStatement   pstmt    = null;
 	// 오라클의 커서를 조작하는 객체 선언
 	ResultSet           rs      = null;
+	DBConnectionMgr 	dbMgr 	= null;
 	
 	//생성부
-	public JdbcTest() {
+	public JdbcTest2() {
 		String sql = "SELECT empno, ename, sal FROM emp";
+		dbMgr = DBConnectionMgr.getInstance();
 		try {
-			// 오라클 드라이버 클래스 로딩하기
-			Class.forName(JdbcTest._DRIVER);
 			// 연결통로 확보하기
-			con = DriverManager.getConnection(_URL, _USER, _PW);
+			con = dbMgr.getConnection();
 			// 오라클 서버에 select문을 전달할 전령 객체 생성
 			pstmt = con.prepareStatement(sql);
 			// 오라클에 살고 있는 커서 조작 위에서 자바가 제공하는 객체 생성
 			rs = pstmt.executeQuery();
 			EmpVO eVO = null;
-//			rs.next();
-//			rs.next();
-//			rs.next();
-//			rs.next();
-//			rs.next();
-//			rs.next();
-//			rs.next();
-//			rs.next();
-//			rs.next();
-//			rs.next();
-//			rs.next();
+
 			while(rs.next()) {
 				eVO = new EmpVO();
 				eVO.setEmpno(rs.getInt("empno"));
 				eVO.setEname(rs.getNString("ename"));
 				eVO.setSal(rs.getDouble("sal"));
-//				int 	rempno  = rs.getInt("empno");
-//				String  rename  = rs.getNString("ename");
-//				double  sal 	= rs.getDouble("sal");
 				System.out.println(eVO.getEname()+" , "+eVO.getEmpno()+", "+eVO.getSal());
 			}
-		} catch(ClassNotFoundException ce) {
+		} catch(SQLException se) {
 			System.out.println("드라이버 클래스 로딩 실패");
 			return;
 		} 
-		  catch(SQLException se) {
+		  catch(Exception e) {
 			  //'부적합한 식별자 입니다.'라고 뜰 수 있다.
-			System.out.println("SQLException :" +se.getMessage()); //좀 더 구체적인 예외처리 클래스 정보를 알 수 있다.
+			System.out.println("SQLException :" +e.getMessage()); //좀 더 구체적인 예외처리 클래스 정보를 알 수 있다.
 			
 		} 
 		System.out.println("요기");
 	}
 	//오라클 서버 접속
 	public static void main(String[] args) {
-		JdbcTest jt = new JdbcTest();//생성자 호출도 동시에 일어난다.
+		JdbcTest2 jt = new JdbcTest2();//생성자 호출도 동시에 일어난다.
 
 	}
 
