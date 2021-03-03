@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import com.util.DBConnectionMgr;
 
 public class ProcEmpUpdate1 extends JFrame {
-   Connection           con1     = null;
+   Connection           con      = null;
    CallableStatement    cstmt    = null;
    DBConnectionMgr      dbMgr    = null;
    /************************************************************************
@@ -24,13 +24,13 @@ public class ProcEmpUpdate1 extends JFrame {
       int result = 0;
       dbMgr = DBConnectionMgr.getInstance();
       try {
-         con1 = dbMgr.getConnection();
-         cstmt = con1.prepareCall("{call proc_emp_update1(?,?)}");
+         con = dbMgr.getConnection();
+         cstmt = con.prepareCall("{call proc_emp_update1(?,?)}");
          cstmt.setInt(1, p_empno);
          cstmt.registerOutParameter(2, java.sql.Types.VARCHAR);
          result = cstmt.executeUpdate();
          String msg = cstmt.getString(2);
-         System.out.println("result:"+result);
+         System.out.println("result: "+result);
          if(result == 1) {
             JOptionPane.showMessageDialog(this, "수정이 되었습니다.");
          }else {
@@ -49,8 +49,8 @@ public class ProcEmpUpdate1 extends JFrame {
       int result = 0;
       dbMgr = DBConnectionMgr.getInstance();
       try {
-         con1 = dbMgr.getConnection();
-         cstmt = con1.prepareCall("{call proc_emp_update2(?)}");
+         con = dbMgr.getConnection();
+         cstmt = con.prepareCall("{call proc_emp_update2(?)}");
          cstmt.setInt(1, p_deptno);
          result = cstmt.executeUpdate();
          System.out.println("result:"+result);
