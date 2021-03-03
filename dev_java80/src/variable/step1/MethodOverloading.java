@@ -11,7 +11,7 @@ public class MethodOverloading {
 	DeptVO go(DeptVO pdvo) {
 		System.out.println(pdvo.getDeptno()+"," + pdvo.getDname()+"," + pdvo.getLoc());
 		DeptVO rdvo = null;
-		rdvo = new DeptVo();
+		rdvo = new DeptVO();
 		// 오라클을 경유한 다음, 조회 결과를 받아온 내용을 담는 클래스이다.
 		return rdvo;
 	}
@@ -29,15 +29,15 @@ public class MethodOverloading {
 	public static void main(String[] args) {
 		MethodOverloading mol = new MethodOverloading();
 		mol.go();
-		mol.go(10); // 9번의 값은 여기서 결정된다. 메소드 호출할 때 결정된다. 파라미터이다. 값에 의한 호출이다.
-		mol.go("Smith"); //참조형 타입이니까 참조에 의한 호출이다. -String만 예외이다. 호출할 때 주소번지가 아니라 값이 출력된다는 점에 대해서..
-		DeptVO pdvo = new DeptVO();
-		
-		pdvo.setDeptno(50); // int Type
-		pdvo.setDname("개발1팀"); // String Type
-		pdvo.setLoc("제주도"); // String Type
-		
-		mol.go(pdvo); // 주소번지를 넘겼다. 참조에 의한 호출이다 <==> 값에 의한 호출이다.
+		mol.go(20); // 9번의 값은 여기서 결정된다. 메소드 호출할 때 결정된다. 파라미터이다. 값에 의한 호출이다.
+		mol.go("junhyeon"); //참조형 타입이니까 참조에 의한 호출이다. -String만 예외이다. 호출할 때 주소번지가 아니라 값이 출력된다는 점에 대해서..
+//		DeptVO pdvo = new DeptVO();
+//		
+//		pdvo.setDeptno(50); // int Type
+//		pdvo.setDname("개발1팀"); // String Type
+//		pdvo.setLoc("제주도"); // String Type
+//		
+//		mol.go(pdvo); // 주소번지를 넘겼다. 참조에 의한 호출이다 <==> 값에 의한 호출이다.
 		
 	}
 
