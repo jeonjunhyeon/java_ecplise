@@ -24,6 +24,7 @@ public class AddressDialog2 extends JDialog implements ActionListener {
     JTextField 		jtf_loc 		= new JTextField();
     JButton 		jbtn_account    = new JButton("처리");
     JButton 		jbtn_close     	= new JButton("닫기");
+    
     DeptVO 			dVO 			= null;
     static AddressBook2 aBook 	    = null;
     public AddressDialog2() {

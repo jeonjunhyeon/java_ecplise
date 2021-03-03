@@ -41,7 +41,6 @@ public class DBConnectionMgr {
          if(pstmt !=null) pstmt.close();
          if(con !=null) con.close();
       } catch (Exception e) {
-         // TODO: handle exception
       }
    }
    //사용한 자원 반납하기
