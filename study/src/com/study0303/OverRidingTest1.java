@@ -21,7 +21,8 @@ package com.study0303;
 			System.out.println("남자의 직업은 "+job+"입니다.");
 		}
 	}
-	public class OverRidingTest1 {//메서드명, 변수, 반환형이 모두 같을 때 상위클래스의 모든 변수를 다 재정의해서 사용하겠다!
+	public class OverRidingTest1 {
+//메서드명, 변수, 반환형이 모두 같을 때 상위클래스의 모든 변수를 다 재정의해서 사용하겠다!
 		public static void main(String[] args) {
 		
 			Job j = new Job();
