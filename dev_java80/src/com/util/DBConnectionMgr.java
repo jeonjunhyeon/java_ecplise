@@ -7,12 +7,16 @@ import java.sql.ResultSet;
 
 public class DBConnectionMgr {
    private final static String _DRIVER = "oracle.jdbc.driver.OracleDriver";
-   private final static String _URL    = "jdbc:oracle:thin:@192.168.0.11:1521:orcl11";
+   private final static String _URL    = "jdbc:oracle:thin:@192.168.0.23:1521:orcl11";
    private final static String _USER   = "scott";
    private final static String _PW     = "tiger";
    
-   static DBConnectionMgr dbMgr = null;
+   private static DBConnectionMgr dbMgr = null;
+   //이른 인스턴스화 (eager)
+   private static DBConnectionMgr dbMgr2 = new DBConnectionMgr();
    Connection con = null;
+   private DBConnectionMgr() {}
+   //게으른 인스턴스화 - 선언과 생성이 따로 쓰여졌을 때, null로 해놔서 메서드 안에서 new하는 것
    public static DBConnectionMgr getInstance() {
       if(dbMgr == null) {
          dbMgr = new DBConnectionMgr();
@@ -24,6 +28,12 @@ public class DBConnectionMgr {
       try {
          Class.forName(_DRIVER);
          con = DriverManager.getConnection(_URL, _USER, _PW);
+         /* 얘네들을 통해서 트랜잭션 처리에 대한 이해가 필요하기 때문에, 현재 배움으로는 아직..
+         con.setAutoCommit(true); // 켜둔다
+         con.setAutoCommit(false); // 꺼둔다
+         con.commit(false);
+         con.rollback();
+         */
       } catch (ClassNotFoundException ce) {
          // TODO: handle exception
          System.out.println("드라이버 클래스를 찾을 수 없습니다.");
