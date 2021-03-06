@@ -5,6 +5,16 @@ package book.ch7;
  *  ⓑ 끼워넣기가 안된다.
  *  배열의 주번.length 명사형 -원소의 갯수.  "hello".length() -> 문자열의 길이이다.
  */
+
+class Heeeeeee {
+	void hEEEEEEEEEEEEE() {
+		System.out.println("heeeeeeeeeeeeee");
+	}
+}
+
+
+
+
 public class Array1 {
 	
 	public void printArray(int empnos[]) {

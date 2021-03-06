@@ -19,6 +19,7 @@ import com.vo.DeptVO;
 public class AddressDialog2 extends JDialog implements ActionListener {
 	
 	static DBConnectionMgr dbMgr 	= null;
+	static AddressDialog2 	aDia 	= null;
 	Connection 		  	   con 	 	= null;
     PreparedStatement 	   ipstmt 	= null;
     PreparedStatement 	   upstmt 	= null;
@@ -52,7 +53,7 @@ public class AddressDialog2 extends JDialog implements ActionListener {
     // 게으른 인스턴스화
     static AddressBook2 aBook = null;
      //static AddressBook2 aBook = new AddressBook2();
-    public AddressDialog2() {
+    private AddressDialog2() {
     	dbMgr = DBConnectionMgr.getInstance();
     	try {
     		con =dbMgr.getConnection();
@@ -63,6 +64,14 @@ public class AddressDialog2 extends JDialog implements ActionListener {
 		}
         initDisplay();
     }
+    
+    public static AddressDialog2 getInstance() {
+    	if (aDia == null) {
+    		aDia = new AddressDialog2();
+    	}
+    	return aDia;
+    }
+    
     //화면처리부
     public void initDisplay() {
        //JPanel이 디폴트로 갖는 FlowLayout을 뭉갠다.

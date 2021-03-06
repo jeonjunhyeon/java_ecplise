@@ -35,7 +35,7 @@ public class AddressBook2 implements ActionListener{
     JMenuItem jmi_ins   	 = new JMenuItem("입력");
     JMenuItem jmi_upd     = new JMenuItem("수정");
     JMenuItem jmi_del     = new JMenuItem("삭제");
-    AddressDialog2 aDia   = new AddressDialog2();
+    static AddressDialog2 aDia   = null;
     DeptVO 		  dVO    = null;
     static AddressBook2 aBook = null;
     //   static AddressBook2 aBook = new AddressBook2();
@@ -52,27 +52,21 @@ public class AddressBook2 implements ActionListener{
     }
     //주소 목록 조회 - 새로고침 처리
     public void refresh() {
-       System.out.println("refresh 호출 성공");
 ///////////////////////////[[전체 조회하기 소스 추가]]//////////////////////////////////////////////
        DBConnectionMgr 	dbMgr 	= DBConnectionMgr.getInstance();
        Connection 	 	con   	= null;
        PreparedStatement 	pstmt 	= null;
        ResultSet 			rs 		= null;
 /////////////////////////////////////[[ 조회결과를 처리  ]]////////////////////////////////////
-       String sql = "SELECT deptno, dname, loc FROM dept"; 
+       String sql = "SELECT deptno, dname, loc FROM dept";
        DeptVO dVOS[] = null;
        try {
          //연결통로확보 하기
-          System.out.println("con before");
           con =dbMgr.getConnection();
           //오라클 서버에 select문을 전달할 전령 객체 생성
-          System.out.println("pstmt before");
           pstmt = con.prepareStatement(sql);
-          System.out.println("pstmt after");
           //오라클에 살고 있는 커서 조작  위해서 자바가 제공하는 객체 생성
-          System.out.println("rs before");
           rs = pstmt.executeQuery();
-          System.out.println("rs after");
           dVO = null;
           Vector<DeptVO> al = new Vector<DeptVO>();
           while(rs.next()) {
@@ -82,7 +76,6 @@ public class AddressBook2 implements ActionListener{
              dVO.setLoc(rs.getString("loc"));
              al.add(dVO);
           }
-          System.out.println("al.size():"+al.size());
           dVOS = new DeptVO[al.size()];
           //벡터에 담긴 정보를 꺼내서 객체 배열에 초기화 하기
           al.copyInto(dVOS);
@@ -92,7 +85,7 @@ public class AddressBook2 implements ActionListener{
              dtm_dept.removeRow(0);
           }
           for(int i=0;i<dVOS.length;i++) {
-             Vector oneRow = new Vector();
+             Vector<Object> oneRow = new Vector<Object>();
              oneRow.add(dVOS[i].getDeptno());
              oneRow.add(dVOS[i].getDname());
              oneRow.add(dVOS[i].getLoc());
@@ -138,6 +131,9 @@ public class AddressBook2 implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
        Object obj = ae.getSource();
+       
+       aDia.getInstance();
+       
        if(obj == jmi_selALL) {
     	   refresh();
        }
@@ -152,7 +148,7 @@ public class AddressBook2 implements ActionListener{
              return;
           }
        }
-       else if(obj == jmi_ins) {
+       else if(obj == jmi_ins) {	/////////입력
           /*
            * @param1은 AddressDialog에 출력되는 제목글자를 바꿔줄려구
            * @param2은 AddressBook에서 조회된 결과를 AddressDialog에서 재사용해야 할 경우 필요하다는데
@@ -189,19 +185,14 @@ public class AddressBook2 implements ActionListener{
              DeptVO dVO = null;
              try {
                 //연결통로확보 하기
-                System.out.println("con before");
                 con =dbMgr.getConnection();
                 //오라클 서버에 select문을 전달할 전령 객체 생성
-                System.out.println("pstmt before");
                 pstmt = con.prepareStatement(sql);
                 //?자리에 값을 치환하기 - 사용자가 선택한 로우의 부서번호
                 pstmt.setInt(1, deptno);
-                System.out.println("pstmt after");
                 //오라클에 살고 있는 커서를 조작하기 위해서 자바가 제공하는 객체 생성
-                System.out.println("rs before");
                 rs = pstmt.executeQuery();
                 if(rs.next()) {
-                   JOptionPane.showMessageDialog(jf, "조회결과가 있을 때");
                    dVO = new DeptVO();
                    dVO.setDeptno(rs.getInt("deptno"));
                    dVO.setDname(rs.getString("dname"));
@@ -250,19 +241,14 @@ public class AddressBook2 implements ActionListener{
              DeptVO dVO = null;       
              try {
                 //연결통로확보 하기
-                System.out.println("con before");
                 con =dbMgr.getConnection();
                 //오라클 서버에 select문을 전달할 전령 객체 생성
-                System.out.println("pstmt before");
                 pstmt = con.prepareStatement(sql);
                 //?자리에 값을 치환하기 - 사용자가 선택한 로우의 부서번호
                 pstmt.setInt(1, deptno);
-                System.out.println("pstmt after");
                 //오라클에 살고 있는 커서 조작  위해서 자바가 제공하는 객체 생성
-                System.out.println("rs before");
                 rs = pstmt.executeQuery();
                 if(rs.next()) {
-                   JOptionPane.showMessageDialog(jf, "조회결과가 있을 때");
                    dVO = new DeptVO();
                    dVO.setDeptno(rs.getInt("deptno"));
                    dVO.setDname(rs.getString("dname"));
