@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 
 public class DBConnectionMgr {
    private final static String _DRIVER = "oracle.jdbc.driver.OracleDriver";
-   private final static String _URL    = "jdbc:oracle:thin:@192.168.0.23:1521:orcl11";
+   private final static String _URL    = "jdbc:oracle:thin:@localhost:1521:orcl11";
    private final static String _USER   = "scott";
    private final static String _PW     = "tiger";
    
@@ -51,6 +51,7 @@ public class DBConnectionMgr {
          if(pstmt !=null) pstmt.close();
          if(con !=null) con.close();
       } catch (Exception e) {
+    	  e.printStackTrace();
       }
    }
    //사용한 자원 반납하기
@@ -61,7 +62,7 @@ public class DBConnectionMgr {
          if(pstmt !=null) pstmt.close();
          if(con !=null) con.close();
       } catch (Exception e) {
-         // TODO: handle exception
+    	  e.printStackTrace();
       }
    }
 }
