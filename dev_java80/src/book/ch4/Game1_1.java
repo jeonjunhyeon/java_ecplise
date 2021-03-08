@@ -18,6 +18,7 @@ public class Game1_1 {
 		System.out.println("0부터 9까지 골라서 작성하세요.");
 		int count = 0;
 		String user = null;
+		int dap = 0;
 		// 3번의 기회를 줄게 - 1번, 2번, 3번 ==> 반복문
 		for(;(user=sc.nextLine())!=null;){
 			// insert here - 실행문
